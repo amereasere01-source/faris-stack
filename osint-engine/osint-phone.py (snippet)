@@ -1,0 +1,8 @@
+import phonenumbers, opencage, httpx, asyncio
+from geopy.geocoders import Nominatim
+async def phone_deep(number:str):
+    p = phonenumbers.parse(number, None)
+    geo = opencage.geocode(number)
+    breach = httpx.get(f"https://api.dehashed.com/search?query={number}", auth=("user","pass")).json()
+    telegram =  httpx.get(f"https://api.telephosint.com/tg/{number}").json()
+    return {"country":geocoder.description_for_number(p,'ar'), "geo":geo, "breach":breach, "tg":telegram}
