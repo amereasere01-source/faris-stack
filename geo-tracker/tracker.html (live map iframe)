@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9/dist/leaflet.js"></script>
+  </head>
+  <body><div id="map" style="height:100vh"></div>
+  <script>
+  var map = L.map('map').setView([24.7,46.7],5);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+  const ws = new WebSocket(`wss://${window.location.host}/ws`);
+  ws.onmessage = (e)=>{
+     const d = JSON.parse(e.data);
+     L.marker([d.lat,d.lon]).addTo(map).bindPopup(d.number);
+  }
+  </script>
+  </body>
+</html>
