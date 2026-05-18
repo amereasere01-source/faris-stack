@@ -1,0 +1,9 @@
+NODE_ENV=production
+PORT_BACKEND=3001
+PORT_AI=8000
+MONGO=mongodb://mongo:27017/faris
+REDIS=redis://redis:6379
+JWT_SEC=0x6b657954686569734d794372797074304666
+HF_TOKEN=hf_****************************************
+ONION_PRIV_KEY=-----BEGIN RSA PRIVATE KEY-----
+GPU_MEMORY=6
